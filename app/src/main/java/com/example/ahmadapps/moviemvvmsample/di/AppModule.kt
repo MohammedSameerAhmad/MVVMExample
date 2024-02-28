@@ -31,16 +31,18 @@ object AppModule {
 
     @Provides
     @Singleton
-    private fun provideMoviesApi(): MovieAPI = Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(MovieAPI.BASE_URL)
-        .client(okHttpClient)
-        .build()
-        .create(MovieAPI::class.java)
+    fun provideMoviesApi(): MovieAPI{
+     return Retrofit.Builder()
+         .addConverterFactory(GsonConverterFactory.create())
+         .baseUrl(MovieAPI.BASE_URL)
+         .client(okHttpClient)
+         .build()
+         .create(MovieAPI::class.java)
+    }
 
     @Provides
     @Singleton
-    private fun provideMovieDatabase(app: Application): MovieDatabase{
+    fun provideMovieDatabase(app: Application): MovieDatabase{
         return Room.databaseBuilder(
             app,
             MovieDatabase::class.java,

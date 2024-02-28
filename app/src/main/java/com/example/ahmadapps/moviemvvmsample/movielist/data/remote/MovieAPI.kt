@@ -14,6 +14,7 @@ interface MovieAPI {
         @Query("page") pageNumber: Int,
         @Query("api_key") apiKey: String = API_KEY
     ) : MovieListDto
+
     companion object{
         const val BASE_URL = "https://api.themoviedb.org/3/"
         const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"

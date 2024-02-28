@@ -17,7 +17,8 @@ import javax.inject.Inject
 Created by Mohammed Sameer Ahmad Android learning
  */
 class MovieListRepositoryImpl @Inject constructor(
-    private val movieApi: MovieAPI, private val movieDatabase: MovieDatabase
+    private val movieApi: MovieAPI,
+    private val movieDatabase: MovieDatabase
 ) : MovieListRepository {
     override suspend fun getMovieList(
         forceFetchFromRemote: Boolean, category: String, page: Int
@@ -27,7 +28,7 @@ class MovieListRepositoryImpl @Inject constructor(
             emit(Resource.Loading(true))
 
             val localMovieList = movieDatabase.movieDao.getMovieListByCategory(category)
-            val shouldLoadLocalMovie = localMovieList.isEmpty() && !forceFetchFromRemote
+            val shouldLoadLocalMovie = localMovieList.isNotEmpty() && !forceFetchFromRemote
 
             if (shouldLoadLocalMovie) {
                 emit(Resource.Success(data = localMovieList.map { movieEntity ->
